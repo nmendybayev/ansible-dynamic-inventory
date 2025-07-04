@@ -23,34 +23,34 @@
 │           └── main.yaml
 ```
 ### Files functionality:
-'main.tf'      – creates two EC2 instances and a Security Group
-'nginx.yaml'   – Ansible playbook that installs Nginx on the EC2 instances
-'inventory.py' – dynamic inventory (used instead of inventory.ini), written in Python
-'main.yaml'    – task file used by the nginx role to install and start Nginx
-'ansible.cfg'  – Ansible configuration file that specifies 'inventory.py' as the inventory source
+- 'main.tf'      – creates two EC2 instances and a Security Group
+- 'nginx.yaml'   – Ansible playbook that installs Nginx on the EC2 instances
+- 'inventory.py' – dynamic inventory (used instead of inventory.ini), written in Python
+- 'main.yaml'    – task file used by the nginx role to install and start Nginx
+- 'ansible.cfg'  – Ansible configuration file that specifies 'inventory.py' as the inventory source
 
 ### Commands to implement/destroy the project:
 
-OPTIONAL:
+#### OPTIONAL:
 
-terraform init
-terraform validate
-terraform fmt
-terraform plan
+- terraform init
+- terraform validate
+- terraform fmt
+- terraform plan
 
-REQUIRED:
+#### REQUIRED:
 
-chmod +x inventory.py                     # make inventory file executable
-chmod 400 path-to-key-pair/devops.pem     # make SSH key-pair only for reading
+- chmod +x inventory.py                     # make inventory file executable
+- chmod 400 path-to-key-pair/devops.pem     # make SSH key-pair only for reading
 
-TO PROVISION AND CONFIGURE:
+#### TO PROVISION AND CONFIGURE:
 
-terraform apply -auto-approve
-ansible-playbook nginx.yaml
+- terraform apply -auto-approve
+- ansible-playbook nginx.yaml
 
-TO DESTROY:
+#### TO DESTROY:
 
-terraform destroy -auto-approve
+- terraform destroy -auto-approve
 
 ### Need to know:
 
@@ -116,9 +116,11 @@ resource "null_resource" "run_ansible" {
 
 In general, I recommend running Terraform and Ansible separately during development and testing. Once all issues are resolved and everything works as expected, you can add the following code to the 'main.tf' and use 'terraform apply -auto-approve' to provision and configure the EC2 instances in a single step.
 
+* provisioner "remote-exec"  - optional.
+
 
 # Deliverables:
-Once all commands ran, you should expect following message, this is an example:
+Once all commands have been executed, you should see an output message like the following:
 
 ```
 Apply complete! Resources: 3 added, 0 changed, 0 destroyed.
@@ -131,6 +133,7 @@ nginx_ips = [
 ]
 ```
 
-Then you have to check your IPs in an internet browser to see the NGINX welcome page.
+Next, open the provided IP addresses in a web browser. You should see the default NGINX welcome page, confirming that the setup was successful.
 
-## That is all. It was a project where we used dynamic inbentory file to configure VMs. 
+## That's it. 
+This project demonstrated how to use a dynamic Ansible inventory to configure multiple virtual machines (EC2 instances) with NGINX.
