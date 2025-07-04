@@ -1,0 +1,18 @@
+# I used ami-05ffe3c48a9991133, which is Linux2, which is RedHat/CentOS-based, so it uses yum.
+# If you use Debian/Ubuntu, use apt.
+---
+- name: Update package cache
+  yum:
+    name: "*"
+    state: latest
+
+- name: Install Nginx
+  yum:
+    name: nginx
+    state: latest
+
+- name: Ensure Nginx is running
+  systemd:
+    name: nginx
+    state: started
+    enabled: yes
