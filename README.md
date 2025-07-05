@@ -33,7 +33,6 @@
 
 #### OPTIONAL:
 
-- terraform init
 - terraform validate
 - terraform fmt
 - terraform plan
@@ -45,6 +44,7 @@
 
 #### TO PROVISION AND CONFIGURE:
 
+- terraform init
 - terraform apply -auto-approve
 - ansible-playbook nginx.yaml
 

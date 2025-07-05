@@ -54,6 +54,12 @@ resource "aws_instance" "nginx" {
   vpc_security_group_ids = [aws_security_group.nginx.id]
   key_name               = local.key_name
 
+  tags = {
+    Name        = "nginx-${count.index}"
+    Role        = "web"
+    Environment = "dev"
+  }
+
   provisioner "remote-exec" {
     inline = ["echo 'SSH is ready on instance ${count.index}'"]
 
